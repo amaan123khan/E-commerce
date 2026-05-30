@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <div>
       <img src={assets.logo} alt="" />
-      <button>Logout</button>
+      <button>Login</button>
 
     </div>
   )
