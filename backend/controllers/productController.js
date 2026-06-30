@@ -5,10 +5,17 @@ import productModel from '../models/productModel.js'
 const addProduct = async (req, res) => {
   try {
 
-        console.log("Cloudinary config:", cloudinary.config());
+    console.log("Cloudinary config:", cloudinary.config());
 
-
-    const { name, description, price, category, subcategory, sizes, bestseller } = req.body
+    const {
+      name,
+      description,
+      price,
+      category,
+      subCategory,
+      sizes,
+      bestseller
+    } = req.body;
 
     const image1 = req.files?.image1?.[0]
     const image2 = req.files?.image2?.[0]
@@ -31,9 +38,9 @@ const addProduct = async (req, res) => {
       description,
       price: Number(price),
       category,
-      subcategory,
+      subCategory,
       bestseller: bestseller === 'true',
-      sizes:JSON.parse(sizes),
+      sizes: JSON.parse(sizes),
       image: imagesUrl,
       date: Date.now()
     }
@@ -44,7 +51,7 @@ const addProduct = async (req, res) => {
     await product.save();
 
 
-    res.json({ success: true, message: "Product Added"})
+    res.json({ success: true, message: "Product Added" })
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message })
@@ -55,28 +62,37 @@ const addProduct = async (req, res) => {
 // function for list product
 const listProduct = async (req, res) => {
   try {
+const products = await productModel.find({});
 
-    const products = await productModel.find({});
-    res.json({ success: false, message: error.message})
+res.json({
+  success: true,
+  products
+});
 
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message}) 
-  }
+  console.log("========= ERROR =========");
+  console.log(error);
+  console.log(error.message);
+
+  res.json({
+    success: false,
+    message: error.message
+  });
+}
 
 }
 
 // function for removing product
 const removeProduct = async (req, res) => {
-try {
+  try {
 
-  await productModel.findByIdAndDelete(req.body.id)
-  res.json({ success: true, message: "Product removed"})
+    await productModel.findByIdAndDelete(req.body.id)
+    res.json({ success: true, message: "Product removed" })
 
-} catch (error) {
-  console.log(error);
-  res.json({ success: false, message: error.message})
-}
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message })
+  }
 
 }
 
@@ -84,13 +100,13 @@ try {
 const singleProduct = async (req, res) => {
   try {
 
-       const { productId} = req.body
-       const product = await productModel.findById(productId)
-       res.json({ success: true, product})
+    const { productId } = req.body
+    const product = await productModel.findById(productId)
+    res.json({ success: true, product })
 
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: error.message})
+    res.json({ success: false, message: error.message })
 
   }
 
