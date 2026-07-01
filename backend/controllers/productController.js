@@ -1,11 +1,11 @@
-import { v2 as cloudinary } from 'cloudinary';
+// import { v2 as cloudinary } from 'cloudinary';
 import productModel from '../models/productModel.js'
 
 // fuction for adding product
 const addProduct = async (req, res) => {
   try {
 
-    console.log("Cloudinary config:", cloudinary.config());
+    // console.log("Cloudinary config:", cloudinary.config());
 
     const {
       name,
@@ -24,13 +24,17 @@ const addProduct = async (req, res) => {
 
     const images = [image1, image2, image3, image4].filter((item) => item !== undefined)
 
-    let imagesUrl = await Promise.all(
-      images.map(async (item) => {
-        let result = await cloudinary.uploader.upload(item.path, {
-          resource_type: 'image'
-        });
-        return result.secure_url;
-      })
+    // let imagesUrl = await Promise.all(
+    //   images.map(async (item) => {
+    //     let result = await cloudinary.uploader.upload(item.path, {
+    //       resource_type: 'image'
+    //     });
+    //     return result.secure_url;
+    //   })
+    // );
+
+    const imagesUrl = images.map(
+      (item) => `http://localhost:4000/uploads/${item.filename}`
     );
 
     const productData = {
@@ -62,23 +66,23 @@ const addProduct = async (req, res) => {
 // function for list product
 const listProduct = async (req, res) => {
   try {
-const products = await productModel.find({});
+    const products = await productModel.find({});
 
-res.json({
-  success: true,
-  products
-});
+    res.json({
+      success: true,
+      products
+    });
 
   } catch (error) {
-  console.log("========= ERROR =========");
-  console.log(error);
-  console.log(error.message);
+    console.log("========= ERROR =========");
+    console.log(error);
+    console.log(error.message);
 
-  res.json({
-    success: false,
-    message: error.message
-  });
-}
+    res.json({
+      success: false,
+      message: error.message
+    });
+  }
 
 }
 
