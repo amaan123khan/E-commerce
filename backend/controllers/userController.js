@@ -14,7 +14,7 @@ const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const normalizedEmail = email.trim().toLowerCase(); 
+        const normalizedEmail = email.trim().toLowerCase();
 
         const user = await userModel.findOne({ email: normalizedEmail });
 
@@ -22,7 +22,7 @@ const loginUser = async (req, res) => {
             return res.json({ success: false, message: "User doesn't exist" });
         }
 
-        
+
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (isMatch) {
@@ -39,16 +39,27 @@ const loginUser = async (req, res) => {
 };
 
 
+
 // Route for user register
 const registerUser = async (req, res) => {
     try {
 
-        const { name, email, password } = req.body;
+        console.log("Request Body:", req.body);
 
-        // checking user already exists or not
+        const { name, password } = req.body;
+        const email = req.body.email.trim().toLowerCase();
+
+        console.log("Email:", email);
+
         const exists = await userModel.findOne({ email });
+
+        console.log("Exists:", exists);
+
         if (exists) {
-            return res.json({ success: false, message: "User already exists" })
+            return res.json({
+                success: false,
+                message: "User already exists"
+            });
         }
 
         // validating email format & strong password
@@ -72,11 +83,18 @@ const registerUser = async (req, res) => {
             password: hashedPassword
         })
 
-        const user = await newUser.save()
+        const user = await newUser.save();
 
-        const token = createToken(user._id)
+        console.log("User Saved:", user);
 
-        res.json({ success: true, token })
+        const token = createToken(user._id);
+
+        console.log("Sending Success Response");
+
+        res.json({
+            success: true,
+            token
+        });
 
     } catch (error) {
         console.log(error);
@@ -90,7 +108,10 @@ const adminLogin = async (req, res) => {
 
     try {
 
-        const { email, password } = req.body
+        const password = req.body.password;
+        const email = req.body.email.trim().toLowerCase();
+
+        const user = await userModel.findOne({ email });
 
         if (
             email === process.env.ADMIN_EMAIL &&
