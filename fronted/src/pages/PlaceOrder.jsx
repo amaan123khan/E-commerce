@@ -3,6 +3,7 @@ import Title from '../components/Title'
 import CartTotal from '../components/CartTotal'
 import { assets } from '../assets/assets'
 import { ShopContext } from '../context/ShopContext'
+import { toast } from "react-toastify";
 import axios from 'axios'
 
 const PlaceOrder = () => {
@@ -41,7 +42,6 @@ const PlaceOrder = () => {
             const itemInfo = structuredClone(products.find(product => product._id === items))
             if (itemInfo) {
               itemInfo.size = item
-              itemInfo.size = item
               itemInfo.quantity = cartItems[items][item]
               orderItems.push(itemInfo)
             }
@@ -74,14 +74,14 @@ const PlaceOrder = () => {
       }
 
     } catch (error) {
-      
+        console.log(error);
     }
 
   }
 
 
   return (
-    <form onSubmit={onChangeHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t'>
+    <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t'>
 
       {/* Left Side */}
       <div className='flex flex-col gap-4 w-full sm:max-w-[480px]'>
