@@ -1,4 +1,4 @@
-import imagekit from "../config/imagekit.js";
+import imagekit from "../config/imageKit.js";
 import fs from "fs";
 import productModel from '../models/productModel.js'
 
