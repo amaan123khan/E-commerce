@@ -10,15 +10,8 @@ const Login = ({ setToken }) => {
     const onSubmitHandler = async (e) => {
 
         e.preventDefault()
-        console.log("Login button clicked");
-        console.log("Backend URL:", backendUrl);
-        console.log("Email:", email);
-
-
+        
         try {
-
-            console.log("Sending request...");
-
 
             const response = await axios.post(
                 backendUrl + '/api/user/admin',
@@ -27,8 +20,6 @@ const Login = ({ setToken }) => {
                     password
                 }
             )
-
-            console.log("Response:", response.data);
 
 
             if (response.data.success) {
@@ -41,7 +32,6 @@ const Login = ({ setToken }) => {
                 )
             }
 
-            console.log(response.data)
 
         } catch (error) {
 

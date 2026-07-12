@@ -17,14 +17,13 @@ const Login = () => {
     try {
       if (currentState === 'Sign Up') {
 
-        console.log("Sending Signup Data:", {
+         {
           name,
           email,
           password
-        });
+        };
 
         const response = await axios.post(backendUrl + '/api/user/register', { name, email, password })
-        console.log(response.data);
 
         if (response.data.success) {
           setToken(response.data.token)
@@ -34,14 +33,11 @@ const Login = () => {
         }
 
       } else {
-        console.log("Login Button Clicked");
 
         const response = await axios.post(
           backendUrl + "/api/user/login",
           { email, password }
         );
-
-        console.log("Login Response:", response.data);
 
         if (response.data.success) {
           setToken(response.data.token);

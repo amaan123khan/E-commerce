@@ -43,11 +43,6 @@ const placeOrder = async (req, res) => {
 
 }
 
-// Placing orders using Stripe Method
-const placeOrderStripe = async (req, res) => {
-
-}
-
 // Placing orders using Razorpay Method
 const placeOrderRazorpay = async (req, res) => {
 
@@ -211,4 +206,4 @@ const updateStatus = async (req, res) => {
 
 }
 
-export { verifyRazorpay, placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus }
+export { verifyRazorpay, placeOrder, placeOrderRazorpay, allOrders, userOrders, updateStatus }

@@ -44,16 +44,10 @@ const loginUser = async (req, res) => {
 const registerUser = async (req, res) => {
     try {
 
-        console.log("Request Body:", req.body);
-
         const { name, password } = req.body;
         const email = req.body.email.trim().toLowerCase();
 
-        console.log("Email:", email);
-
         const exists = await userModel.findOne({ email });
-
-        console.log("Exists:", exists);
 
         if (exists) {
             return res.json({
@@ -85,11 +79,7 @@ const registerUser = async (req, res) => {
 
         const user = await newUser.save();
 
-        console.log("User Saved:", user);
-
         const token = createToken(user._id);
-
-        console.log("Sending Success Response");
 
         res.json({
             success: true,

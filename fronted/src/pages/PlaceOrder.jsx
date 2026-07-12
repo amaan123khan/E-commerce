@@ -95,7 +95,6 @@ const PlaceOrder = () => {
         // API Calls for COD
         case 'cod':
           const response = await axios.post(backendUrl + '/api/order/place', orderData, { headers: { token } })
-          console.log(response.data.success);
           if (response.data.success) {
             setCartItems({})
             navigate('/orders')
@@ -165,11 +164,6 @@ const PlaceOrder = () => {
 
           {/* Payment Method Selection */}
           <div className='flex gap-3 flex-col lg:flex-row'>
-
-            <div onClick={() => setmethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
-              <p className={`min-w-3.5 h-3.5 border rounded-full  ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
-              <img className='h-5 mx-4' src={assets.stripe_logo} alt="" />
-            </div>
 
             <div onClick={() => setmethod('razorpay')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
               <p className={`min-w-3.5 h-3.5 border rounded-full  ${method === 'razorpay' ? 'bg-green-400' : ''}`}></p>

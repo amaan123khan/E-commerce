@@ -6,8 +6,6 @@ import productModel from '../models/productModel.js'
 const addProduct = async (req, res) => {
   try {
 
-    // console.log("Cloudinary config:", cloudinary.config());
-
     const {
       name,
       description,
@@ -55,7 +53,6 @@ const addProduct = async (req, res) => {
       date: Date.now()
     }
 
-    console.log(productData);
 
     const product = new productModel(productData);
     await product.save();
@@ -80,10 +77,7 @@ const listProduct = async (req, res) => {
     });
 
   } catch (error) {
-    console.log("========= ERROR =========");
-    console.log(error);
-    console.log(error.message);
-
+   
     res.json({
       success: false,
       message: error.message
