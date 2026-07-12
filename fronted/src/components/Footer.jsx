@@ -9,7 +9,7 @@ const Footer = () => {
                 <div>
                     <img src={assets.logo} className='mb-5 w-32' alt="" />
                     <p className='w-full md:w-2/3 text-gray-600 '>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci maiores illo cupiditate corporis, eius culpa, explicabo facere laboriosam ab ut nostrum. Sit ducimus accusantium repudiandae. Tenetur, ab architecto. Voluptatum, officia.
+                        Forever is your trusted online fashion destination, offering premium clothing for men, women, and kids. We are committed to providing high-quality products, secure shopping, and a seamless customer experience.
                     </p>
                 </div>
 
@@ -23,22 +23,22 @@ const Footer = () => {
 
                     </ul>
                 </div>
-             
-             <div>
-                <p className='text-xl font-medium mb-5'>GET IN TOUCH</p>
-                <ul className='flex flex-col gap-1 text-gray-600'>
-                    <li>+1-323-346-8789</li>
-                    <li>hello@web.com</li>
-                </ul>
-             </div>
+
+                <div>
+                    <p className='text-xl font-medium mb-5'>GET IN TOUCH</p>
+                    <ul className='flex flex-col gap-1 text-gray-600'>
+                        <li>+1-323-346-8789</li>
+                        <li>hello@web.com</li>
+                    </ul>
+                </div>
 
             </div>
 
 
-             <div>
+            <div>
                 <hr />
                 <p className='py-5 text-sm text-center'>Copyright 2026@ forever.com - All Right Reserved</p>
-             </div>
+            </div>
 
         </div>
     )
