@@ -1,4 +1,5 @@
-// import { v2 as cloudinary } from 'cloudinary';
+import imagekit from "../config/imagekit.js";
+import fs from "fs";
 import productModel from '../models/productModel.js'
 
 // fuction for adding product
@@ -24,18 +25,23 @@ const addProduct = async (req, res) => {
 
     const images = [image1, image2, image3, image4].filter((item) => item !== undefined)
 
-    // let imagesUrl = await Promise.all(
-    //   images.map(async (item) => {
-    //     let result = await cloudinary.uploader.upload(item.path, {
-    //       resource_type: 'image'
-    //     });
-    //     return result.secure_url;
-    //   })
-    // );
+    const imagesUrl = await Promise.all(
+      images.map(async (item) => {
+        const file = fs.readFileSync(item.path);
 
-    const imagesUrl = images.map(
-      (item) => `http://localhost:4000/uploads/${item.filename}`
+        const result = await imagekit.upload({
+          file,
+          fileName: item.filename,
+          folder: "/products",
+        });
+
+        // Delete local file after upload
+        fs.unlinkSync(item.path);
+
+        return result.url;
+      })
     );
+
 
     const productData = {
       name,
