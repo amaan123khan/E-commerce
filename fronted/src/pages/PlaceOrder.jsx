@@ -40,6 +40,8 @@ const PlaceOrder = () => {
       receipt: order.receipt,
 
       handler: async (response) => {
+        alert("Handler Called");
+        console.log(response);
         try {
           const verifyResponse = await axios.post(
             backendUrl + "/api/order/verifyRazorpay",
@@ -187,4 +189,4 @@ const PlaceOrder = () => {
   )
 }
 
-  export default PlaceOrder
+export default PlaceOrder
