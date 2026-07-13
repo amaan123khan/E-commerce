@@ -48,6 +48,9 @@ const placeOrderRazorpay = async (req, res) => {
 
     try {
 
+        console.log("ORDER CREATED");
+
+
         const { userId, items, amount, address } = req.body
 
         const orderData = {
@@ -96,6 +99,8 @@ const placeOrderRazorpay = async (req, res) => {
 
 const verifyRazorpay = async (req, res) => {
     try {
+
+        console.log("VERIFY BODY:", req.body);
 
         const { userId, razorpay_order_id } = req.body;
 

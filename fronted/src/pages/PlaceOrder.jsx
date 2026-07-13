@@ -56,8 +56,11 @@ const PlaceOrder = () => {
             toast.error(verifyResponse.data.message);
           }
         } catch (error) {
-          console.log(error);
-          toast.error(error.message);
+          // console.log(error);
+          // toast.error(error.message);
+          console.log("FULL ERROR:", error);
+          console.log("RESPONSE:", error.response);
+          alert(JSON.stringify(error.response?.data));
         }
       }
     };
